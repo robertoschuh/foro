@@ -48,10 +48,10 @@ return [
             'root' => storage_path('app'),
         ],
 
-        'public' => [
+        'public.php' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'visibility' => 'public',
+            'root' => storage_path('app/public.php'),
+            'visibility' => 'public.php',
         ],
 
         's3' => [
