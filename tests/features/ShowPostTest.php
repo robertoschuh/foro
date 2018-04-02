@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ShowPostTest extends TestCase
+class ShowPostTest extends FeatureTestCase
 {
     /**
      * A basic test example.
@@ -24,6 +24,8 @@ class ShowPostTest extends TestCase
         ]);
 
         $user->posts()->save($post);
+
+        dd(route('posts.show', $post));
 
         // When
         $this->visit(route('posts.show', $post)) //posts/19902

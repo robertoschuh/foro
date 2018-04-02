@@ -26,10 +26,11 @@ class CreatePostsTest extends FeatureTestCase
 
         // Then
         $this->seeInDatabase('posts', [
-           'title' => $title,
-           'content' => $content,
-           'pending' => true,
-            'user_id' => $user->id,
+            'title' => $title,
+            'content' => $content,
+            'pending' => true,
+            'user_id' => $user->id
+
         ]);
 
         // Test a user is redirected to the posts details after creating it.
