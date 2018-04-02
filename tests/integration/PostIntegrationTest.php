@@ -33,4 +33,21 @@ class PostIntegrationTest extends TestCase
          */
 
     }
+
+    // Exercise
+    public function test_post_url_is_correct(){
+
+        $user = $this->defaultUser();
+
+        $post = factory(Post::Class)->make([
+            'title' => 'Como instalar Laravel',
+        ]);
+
+
+        $user->posts()->save($post);
+
+        //dd( $post->url);
+        $this->assertSame('http://foro.test/posts/' . $post->id . '-como-instalar-laravel', $post->url);
+
+    }
 }
