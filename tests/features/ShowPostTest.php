@@ -18,12 +18,14 @@ class ShowPostTest extends FeatureTestCase
            'name' => 'papixula',
         ]);
 
-        $post = factory(\App\Post::class)->make([ // using make instead create, because make creates the model, but it does not save into the db.
+        $post = $this->createPost([ // using make instead create, because make creates the model, but it does not save into the db.
             'title' => 'Como viajar por el mundo',
-            'content' => 'contenido para como viajar por el mundo'
+            'content' => 'contenido para como viajar por el mundo',
+            'user_id'=>   $user->id,
         ]);
 
-        $user->posts()->save($post);
+
+        //dd(\App\User::all()->toArray(), $post->toArray());
 
         //dd(route('posts.show', $post));
 
@@ -38,13 +40,13 @@ class ShowPostTest extends FeatureTestCase
     function test_old_urls_are_redirected(){
 
         // Having
-        $user = $this->defaultUser();
+        //$user = $this->defaultUser();
 
-        $post = factory(\App\Post::class)->make([ // using make instead create, because make creates the model, but it does not save into the db.
+        $post = $this->createPost([ // using make instead create, because make creates the model, but it does not save into the db.
             'title' => 'Old title',
         ]);
 
-        $user->posts()->save($post);
+       // $user->posts()->save($post);
 
         $url = $post->url;
 

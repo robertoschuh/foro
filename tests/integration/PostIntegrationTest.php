@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Post;
 
 class PostIntegrationTest extends TestCase
 {
@@ -13,14 +12,11 @@ class PostIntegrationTest extends TestCase
     public function test_a_slug_is_generate_and_saved_to_the_database()
     {
 
-        $user = $this->defaultUser();
 
-        $post = factory(Post::Class)->make([
+        $post = $this->createPost([
             'title' => 'Como instalar Laravel',
         ]);
 
-
-        $user->posts()->save($post);
 
         $this->assertSame('como-instalar-laravel', $post->slug);
 
@@ -37,14 +33,14 @@ class PostIntegrationTest extends TestCase
     // Exercise
     public function test_post_url_is_correct(){
 
-        $user = $this->defaultUser();
+        //$user = $this->defaultUser();
 
-        $post = factory(Post::Class)->make([
+        $post = $this->createPost([
             'title' => 'Como instalar Laravel',
         ]);
 
 
-        $user->posts()->save($post);
+        //$user->posts()->save($post);
 
         //dd( $post->url);
         $this->assertSame('http://foro.test/posts/' . $post->id . '-como-instalar-laravel', $post->url);
