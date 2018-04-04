@@ -39,9 +39,8 @@ class MarkCommentAsAnswerTest extends TestCase
 
 
         // fresh get a "fresh" model information from the db.
-
+        // Check mutator getAnswerAttribute.
         $this->assertFalse($comments->first()->fresh()->answer);
-
         $this->assertTrue($comments->last()->fresh()->answer);
     }
 }
