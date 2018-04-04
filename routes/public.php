@@ -27,3 +27,9 @@ Route::get('posts/{post}-{slug}', [
    'uses' => 'PostController@show',
 ])->where('post', '\d+');
 //->where('post', '[0-9]+');
+
+// Comments
+Route::post('post/{post}/comment', [
+    'uses' => 'CommentController@store',
+    'as'   => 'comments.store',
+]);
