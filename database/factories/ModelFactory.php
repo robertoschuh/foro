@@ -36,3 +36,18 @@ $factory->define(App\Post::class, function(Faker\Generator $faker){
         },
     ];
 });
+
+$factory->define(App\Comment::class, function(Faker\Generator $faker){
+   return [
+       'comment' => $faker->paragraph,
+       'post_id' => function () {
+            // Only runs if there are not a custom post_id.
+            return factory(\App\Post::class)->create()->id;
+       },
+       'user_id' => function (){
+           // dd('it runs');
+           // If we pass a custom user_id , it never runs.
+           return factory(\App\User::class)->create()->id;
+       },
+   ];
+});
