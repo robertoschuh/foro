@@ -26,4 +26,8 @@ class Comment extends Model
 
         return $this->id === $this->post->answer_id;
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

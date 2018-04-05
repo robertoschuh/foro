@@ -28,7 +28,7 @@ $factory->define(App\Post::class, function(Faker\Generator $faker){
     return [
         'title'   => $faker->sentence,
         'content' => $faker->paragraph,
-        'pending' => $faker->boolean(),
+        'pending' => true, //$faker->boolean(),
         'user_id' => function (){
            // dd('it runs');
             // If we pass a custom user_id , it never runs.

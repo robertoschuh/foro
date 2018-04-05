@@ -16,4 +16,16 @@
         Publicar comentario
     </button>
     {!! Form::close() !!}
+
+    @foreach($post->latestComments as $comment)
+
+        <article class="{{ $comment->answer ? 'answer' : '' }}">
+            <h4>{{ $comment->user->name }}</h4>
+            <p> {{ $comment->comment }}</p>
+
+            {!! Form::open(['route' => ['comments.accept', $comment], 'method' => 'POST']) !!}
+                <button>Submit answer</button>
+            {!! Form::close() !!}
+        </article>
+    @endforeach
 @endsection

@@ -20,6 +20,10 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function latestComments(){
+        return $this->comments()->orderBy('created_at', 'DESC');
+    }
+
     // Mutators
 
     public function setTitleAttribute($value){
