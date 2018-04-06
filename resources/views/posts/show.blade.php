@@ -20,12 +20,14 @@
     @foreach($post->latestComments as $comment)
 
         <article class="{{ $comment->answer ? 'answer' : '' }}">
-            <h4>{{ $comment->user->name }}</h4>
+            <h4 class="author">{{ $comment->user->name }}</h4>
             <p> {{ $comment->comment }}</p>
 
-            {!! Form::open(['route' => ['comments.accept', $comment], 'method' => 'POST']) !!}
-                <button>Submit answer</button>
-            {!! Form::close() !!}
+            @if(Gate::allows('accept', $comment) && !$comment->answer)
+                {!! Form::open(['route' => ['comments.accept', $comment], 'method' => 'POST']) !!}
+                    <button>Submit answer</button>
+                {!! Form::close() !!}
+            @endif
         </article>
     @endforeach
 @endsection

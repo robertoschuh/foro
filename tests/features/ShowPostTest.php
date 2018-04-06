@@ -37,6 +37,7 @@ class ShowPostTest extends FeatureTestCase
             ->see($user->name);
     }
 
+
     function test_old_urls_are_redirected(){
 
         // Having

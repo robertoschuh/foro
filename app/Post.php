@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -22,6 +23,10 @@ class Post extends Model
 
     public function latestComments(){
         return $this->comments()->orderBy('created_at', 'DESC');
+       // return $this->comments()->orderBy('created_at', 'DESC')->paginate();
+      //  return DB::table('comments')->orderBy('created_at', 'desc')->where('post_id', $this->id)->paginate(7);
+
+
     }
 
     // Mutators
