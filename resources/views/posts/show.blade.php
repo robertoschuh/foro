@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>{{  $post->title }}</h1>
-    <div>{{ $post->content }}</div>
+    {!!  $post->safe_html_content !!}
     <div>{{ $post->user->name }}</div>
 
     <div>Comentarios</div>
@@ -21,8 +21,9 @@
 
         <article class="{{ $comment->answer ? 'answer' : '' }}">
             <h4 class="author">{{ $comment->user->name }}</h4>
-            <p> {{ $comment->comment }}</p>
+            <p> {!! $comment->comment !!}}</p>
 
+            {{--  todo: support markdown in the comments --}}
             @if(Gate::allows('accept', $comment) && !$comment->answer)
                 {!! Form::open(['route' => ['comments.accept', $comment], 'method' => 'POST']) !!}
                     <button>Submit answer</button>
