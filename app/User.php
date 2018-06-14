@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function subscriptions(){
+
+        return $this->belongsToMany(Post::class, 'subscriptions'); // Custom pivot table name
+    }
+
     public function comment(Post $post, $message){
 
         $comment = new Comment([
@@ -45,6 +50,14 @@ class User extends Authenticatable
         $this->comments()->save($comment);
     }
 
+    public function isSubscribe(Post $post){
+
+        return $this->subscriptions()->where('post_id', $post->id)->count() > 0;
+    }
+
+    public function subscribeTo($post){
+        return auth()->user()->subscriptions()->attach($post);
+    }
     public function owns($post){
         return $this->id === $post->user->id;
     }

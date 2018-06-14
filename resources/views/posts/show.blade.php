@@ -6,6 +6,12 @@
     {!!  $post->safe_html_content !!}
     <div>{{ $post->user->name }}</div>
 
+    @if(auth()->check() && !auth()->user()->isSubscribe($post))
+        {!! Form::open(['route' => ['posts.subscribe', $post], 'method' => 'POST']) !!}
+            <button type="submit">Subscribe to this post</button>
+        {!! Form::close() !!}
+    @endif
+
     <div>Comentarios</div>
 
     {!! Form::open(['route' => ['comments.store', $post], 'method' => 'POST']) !!}
@@ -31,4 +37,5 @@
             @endif
         </article>
     @endforeach
+
 @endsection
